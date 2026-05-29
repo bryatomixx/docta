@@ -26,13 +26,19 @@ export function parseAllEvents(raw: unknown, config: AttomConfig): EnrichedPrope
   const p = (root.property?.[0] ?? {}) as Record<string, unknown>;
 
   const avmValue = num(getByPath(p, config.paths.avmValue));
+  // allevents/detail returns a single `sale` object (verified 2026-05-29 against
+  // a live response); some responses include a `saleshistory` array instead.
+  // Support both: use the array if present, else wrap the single `sale` object.
   const saleHistRaw = getByPath(p, config.paths.saleHistory);
-  const saleHistory = Array.isArray(saleHistRaw)
-    ? saleHistRaw.map((s) => ({
-        saleDate: str(getByPath(s, config.paths.saleHistoryDate)),
-        saleAmount: num(getByPath(s, config.paths.saleHistoryAmount)),
-      }))
-    : [];
+  const saleSource: unknown[] = Array.isArray(saleHistRaw)
+    ? saleHistRaw
+    : getByPath(p, 'sale')
+      ? [getByPath(p, 'sale')]
+      : [];
+  const saleHistory = saleSource.map((s) => ({
+    saleDate: str(getByPath(s, config.paths.saleHistoryDate)),
+    saleAmount: num(getByPath(s, config.paths.saleHistoryAmount)),
+  }));
 
   return {
     identifiers: {

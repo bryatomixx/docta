@@ -24,6 +24,11 @@ create table if not exists public.enriched_properties (
   updated_at        timestamptz not null default now()
 );
 
+-- Row Level Security: lock the table to server-side only. The Edge Function
+-- uses the service_role / secret key, which bypasses RLS, so it keeps full
+-- access; with no policies, anon/authenticated (public) keys are denied.
+alter table public.enriched_properties enable row level security;
+
 -- attom_id is unique per property: enables upsert (onConflict: attom_id) and
 -- fast lookups for future enrichment reuse.
 create unique index if not exists enriched_properties_attom_id_key

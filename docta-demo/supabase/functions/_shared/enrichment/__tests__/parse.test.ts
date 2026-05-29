@@ -27,3 +27,12 @@ it('assessment is null when the assessment block is missing', () => {
   delete clone.property[0].assessment;
   expect(parseAllEvents(clone, ATTOM_CONFIG).assessment).toBeNull();
 });
+
+it('falls back to the single `sale` object when no saleshistory array is present', () => {
+  const clone = structuredClone(success) as { property: Array<Record<string, unknown>> };
+  delete clone.property[0].saleshistory;
+  clone.property[0].sale = { amount: { salerecdate: '2023-10-23', saleamt: 710000 } };
+  expect(parseAllEvents(clone, ATTOM_CONFIG).saleHistory).toEqual([
+    { saleDate: '2023-10-23', saleAmount: 710000 },
+  ]);
+});

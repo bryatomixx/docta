@@ -5,9 +5,9 @@ export const ATTOM_CONFIG: AttomConfig = {
   endpoint: 'allevents/detail',
   timeoutMs: 10_000,
   maxRetries: 3,
-  // TODO: verify the exact AVM / assessment / sale-history paths within the
-  // allevents/detail response against the official docs:
-  // https://api.developer.attomdata.com/docs
+  // Field paths verified 2026-05-29 against a live allevents/detail response.
+  // Note: allevents/detail returns a single `sale` object (not a `saleshistory`
+  // array); parse.ts falls back to `sale` when no array is present.
   paths: {
     avmValue: 'avm.amount.value',
     avmHigh: 'avm.amount.high',
