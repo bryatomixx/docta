@@ -1,0 +1,29 @@
+{
+  "status": { "version": "1.0.0", "code": 0, "msg": "SuccessWithResult", "total": 1 },
+  "property": [
+    {
+      "identifier": { "attomId": 145423, "fips": "48453", "apn": "0123456789" },
+      "address": {
+        "line1": "123 MAIN ST",
+        "line2": "AUSTIN, TX 78701",
+        "oneLine": "123 MAIN ST, AUSTIN, TX 78701"
+      },
+      "lot": { "lotsize1": 0.25, "lotsize2": 10890 },
+      "summary": { "yearbuilt": 1998 },
+      "building": {
+        "rooms": { "beds": 4, "bathstotal": 3 },
+        "size": { "universalsize": 2450, "livingsize": 2450 }
+      },
+      "assessment": {
+        "assessed": { "assdttlvalue": 410000 },
+        "market": { "mktttlvalue": 520000 },
+        "tax": { "taxamt": 9800, "taxyear": 2024 }
+      },
+      "avm": { "amount": { "value": 535000, "high": 560000, "low": 510000, "scr": 88 } },
+      "saleshistory": [
+        { "amount": { "saleamt": 480000, "salerecdate": "2019-06-01" } },
+        { "amount": { "saleamt": 350000, "salerecdate": "2012-03-15" } }
+      ]
+    }
+  ]
+}

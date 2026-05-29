@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# builds
+dist/
+**/dist/
+*.tsbuildinfo
+
+# env / secrets — never commit
+.env
+.env.*
+**/.env
+**/.env.*
+
+# supabase local
+**/supabase/.branches/
+**/supabase/.temp/
+
+# editor / OS
+.DS_Store
+*.local
+.vite/
+.vscode/
