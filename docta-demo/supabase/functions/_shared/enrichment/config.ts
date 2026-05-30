@@ -3,6 +3,7 @@ import type { AttomConfig } from './types.ts';
 export const ATTOM_CONFIG: AttomConfig = {
   baseUrl: 'https://api.gateway.attomdata.com/propertyapi/v1.0.0/',
   endpoint: 'allevents/detail',
+  mortgageEndpoint: 'property/detailmortgageowner',
   timeoutMs: 10_000,
   maxRetries: 3,
   // Field paths verified 2026-05-29 against a live allevents/detail response.

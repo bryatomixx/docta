@@ -50,6 +50,12 @@ it('throws AttomApiError on a non-zero status.code', async () => {
   await expect(client.fetchAllEvents('a', 'b')).rejects.toBeInstanceOf(AttomApiError);
 });
 
+it('treats SuccessWithoutResult as not found even with a non-zero code', async () => {
+  const body = { status: { code: 400, msg: 'SuccessWithoutResult' } };
+  const client = createAttomClient('k', { http: async () => res(400, body), config: cfg, sleep: noSleep });
+  await expect(client.fetchAllEvents('a', 'b')).rejects.toBeInstanceOf(AttomNotFoundError);
+});
+
 it('retries on HTTP 429 and then succeeds', async () => {
   let n = 0;
   const http: HttpClient = async () => (++n < 3 ? res(429, {}) : res(200, okBody));
@@ -81,4 +87,16 @@ it('aborts on timeout and throws AttomRequestError after exhausting retries', as
     sleep: noSleep,
   });
   await expect(client.fetchAllEvents('a', 'b')).rejects.toBeInstanceOf(AttomRequestError);
+});
+
+it('fetchMortgageOwner queries the detailmortgageowner endpoint', async () => {
+  const body = {
+    status: { code: 0, msg: 'SuccessWithResult' },
+    property: [{ identifier: { attomId: 1 }, mortgage: { amount: 510000 } }],
+  };
+  const http = vi.fn<HttpClient>(async () => res(200, body));
+  const client = createAttomClient('k', { http, config: cfg, sleep: noSleep });
+  const out = await client.fetchMortgageOwner('123 Main St', 'Denver, CO 80212');
+  expect(out).toEqual(body);
+  expect(http.mock.calls[0][0]).toContain('property/detailmortgageowner');
 });

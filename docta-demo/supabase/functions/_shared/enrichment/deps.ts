@@ -2,8 +2,11 @@ import { createClient } from '@supabase/supabase-js';
 import type { EnrichDeps, HttpClient } from './types.ts';
 import { ATTOM_CONFIG } from './config.ts';
 import { createAttomClient } from './attomClient.ts';
-import { SupabaseRepository } from './persistence.ts';
+import { SupabaseRepository, SupabaseLeadRepository } from './persistence.ts';
 import { consoleLogger } from './logger.ts';
+import { createAnthropicWriter } from './anthropicWriter.ts';
+import { createPreviewSender } from './emailSender.ts';
+import type { LeadDeps } from './processLead.ts';
 
 export const realHttp: HttpClient = async (url, init) => {
   const res = await fetch(url, { method: init.method ?? 'GET', headers: init.headers, signal: init.signal });
@@ -38,5 +41,27 @@ export function createDefaultDeps(env: Record<string, string | undefined> = read
     repo: new SupabaseRepository(supabase as never),
     logger: consoleLogger,
     config: ATTOM_CONFIG,
+  };
+}
+
+/**
+ * Lead pipeline deps: everything in EnrichDeps plus the Claude offer-email
+ * writer, the (preview) email sender, and the leads repository.
+ */
+export function createLeadDeps(env: Record<string, string | undefined> = readEnv()): LeadDeps {
+  const base = createDefaultDeps(env);
+  const anthropicKey = required(env, 'ANTHROPIC_API_KEY');
+  const fromEmail = env.OFFER_FROM_EMAIL ?? 'abryan@latinprimefg.com';
+  const supabase = createClient(
+    required(env, 'SUPABASE_URL'),
+    required(env, 'SUPABASE_SERVICE_ROLE_KEY'),
+  );
+  return {
+    ...base,
+    writer: createAnthropicWriter(anthropicKey, fromEmail),
+    emailSender: createPreviewSender(),
+    leads: new SupabaseLeadRepository(supabase as never),
+    fromEmail,
+    offerFactor: env.OFFER_FACTOR ? Number(env.OFFER_FACTOR) : undefined,
   };
 }

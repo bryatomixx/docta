@@ -14,6 +14,7 @@ export interface AttomConfigPaths {
 export interface AttomConfig {
   baseUrl: string;
   endpoint: string;
+  mortgageEndpoint: string;
   timeoutMs: number;
   maxRetries: number;
   paths: AttomConfigPaths;
@@ -32,6 +33,7 @@ export type HttpClient = (
 
 export interface AttomClientApi {
   fetchAllEvents(address1: string, address2: string): Promise<unknown>;
+  fetchMortgageOwner(address1: string, address2: string): Promise<unknown>;
 }
 
 export interface EnrichedProperty {
@@ -52,6 +54,22 @@ export interface EnrichedProperty {
     taxYear: number | null;
   } | null;
   saleHistory: Array<{ saleDate: string | null; saleAmount: number | null }>;
+  financing: {
+    loanAmount: number | null; // recorded original loan (NOT a live payoff balance)
+    lender: string | null;
+    loanDate: string | null;
+    loanType: string | null;
+    termMonths: number | null;
+    dueDate: string | null;
+    estimatedEquity: number | null; // AVM − recorded loan (conservative floor)
+  } | null;
+  owner: {
+    name: string | null;
+    secondName: string | null;
+    corporate: boolean | null;
+    absentee: boolean | null; // absenteeownerstatus === 'A'
+    mailingAddress: string | null;
+  } | null;
   enrichedAt: string;
 }
 

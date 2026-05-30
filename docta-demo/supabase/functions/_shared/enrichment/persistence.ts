@@ -92,3 +92,21 @@ export class SupabaseRepository implements EnrichmentRepository {
     return data ? fromRow(data) : null;
   }
 }
+
+interface MinimalLeadSupabase {
+  from(table: string): { insert(row: unknown): Promise<{ error: { message: string } | null }> };
+}
+
+/** Stores only the lead's email (current scope). */
+export class SupabaseLeadRepository {
+  private readonly client: MinimalLeadSupabase;
+
+  constructor(client: MinimalLeadSupabase) {
+    this.client = client;
+  }
+
+  async saveEmail(email: string): Promise<void> {
+    const { error } = await this.client.from('leads').insert({ email });
+    if (error) throw new Error(error.message);
+  }
+}

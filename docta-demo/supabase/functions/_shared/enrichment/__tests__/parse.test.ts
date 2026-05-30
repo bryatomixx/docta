@@ -1,5 +1,5 @@
 import { it, expect } from 'vitest';
-import { parseAllEvents } from '../parse.ts';
+import { parseAllEvents, parseMortgageOwner } from '../parse.ts';
 import { ATTOM_CONFIG } from '../config.ts';
 import success from './fixtures/allevents-detail.success.json';
 
@@ -35,4 +35,36 @@ it('falls back to the single `sale` object when no saleshistory array is present
   expect(parseAllEvents(clone, ATTOM_CONFIG).saleHistory).toEqual([
     { saleDate: '2023-10-23', saleAmount: 710000 },
   ]);
+});
+
+it('parseMortgageOwner extracts financing and owner', () => {
+  const raw = {
+    property: [
+      {
+        mortgage: { lender: { lastname: 'THE HORN FUNDING CORP' }, amount: 510000, date: '2023-10-23', loantypecode: 'CNV', term: 301, duedate: '2048-11-01' },
+        owner: { corporateindicator: 'N', owner1: { fullname: 'JENNIFER GUBNER' }, owner2: { fullname: 'SYDNEY STENTO' }, absenteeownerstatus: 'A', mailingaddressoneline: '99 OTHER ST, MIAMI, FL' },
+      },
+    ],
+  };
+  const { financing, owner } = parseMortgageOwner(raw);
+  expect(financing).toEqual({
+    loanAmount: 510000,
+    lender: 'THE HORN FUNDING CORP',
+    loanDate: '2023-10-23',
+    loanType: 'CNV',
+    termMonths: 301,
+    dueDate: '2048-11-01',
+    estimatedEquity: null,
+  });
+  expect(owner).toEqual({
+    name: 'JENNIFER GUBNER',
+    secondName: 'SYDNEY STENTO',
+    corporate: false,
+    absentee: true,
+    mailingAddress: '99 OTHER ST, MIAMI, FL',
+  });
+});
+
+it('parseMortgageOwner returns nulls when the blocks are absent', () => {
+  expect(parseMortgageOwner({ property: [{}] })).toEqual({ financing: null, owner: null });
 });

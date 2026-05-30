@@ -68,6 +68,47 @@ export function parseAllEvents(raw: unknown, config: AttomConfig): EnrichedPrope
         : null,
     assessment: buildAssessment(p, config),
     saleHistory,
+    financing: null,
+    owner: null,
     enrichedAt: new Date().toISOString(),
   };
+}
+
+/** Parses ATTOM `property/detailmortgageowner` into the financing + owner blocks. */
+export function parseMortgageOwner(raw: unknown): {
+  financing: EnrichedProperty['financing'];
+  owner: EnrichedProperty['owner'];
+} {
+  const root = raw as { property?: unknown[] };
+  const p = (root.property?.[0] ?? {}) as Record<string, unknown>;
+
+  const loanAmount = num(getByPath(p, 'mortgage.amount'));
+  const lender = str(getByPath(p, 'mortgage.lender.lastname'));
+  const financing =
+    loanAmount !== null || lender !== null
+      ? {
+          loanAmount,
+          lender,
+          loanDate: str(getByPath(p, 'mortgage.date')),
+          loanType: str(getByPath(p, 'mortgage.loantypecode')),
+          termMonths: num(getByPath(p, 'mortgage.term')),
+          dueDate: str(getByPath(p, 'mortgage.duedate')),
+          estimatedEquity: null, // computed in enrichProperty (needs the AVM)
+        }
+      : null;
+
+  const ownerName = str(getByPath(p, 'owner.owner1.fullname'));
+  const absStatus = str(getByPath(p, 'owner.absenteeownerstatus'));
+  const corp = str(getByPath(p, 'owner.corporateindicator'));
+  const owner = ownerName
+    ? {
+        name: ownerName,
+        secondName: str(getByPath(p, 'owner.owner2.fullname')),
+        corporate: corp === null ? null : corp.toUpperCase() === 'Y',
+        absentee: absStatus === null ? null : absStatus.toUpperCase() === 'A',
+        mailingAddress: str(getByPath(p, 'owner.mailingaddressoneline')),
+      }
+    : null;
+
+  return { financing, owner };
 }

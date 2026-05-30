@@ -25,22 +25,29 @@ export function createAttomClient(apiKey: string, deps: AttomClientDeps): AttomC
       property?: Array<{ identifier?: { attomId?: number | string } }>;
     };
     const code = b.status?.code;
-    // ATTOM returns status.code 0 on success. A non-zero code is an API error.
-    // TODO: confirm code semantics against https://api.developer.attomdata.com/docs
-    if (typeof code === 'number' && code !== 0) {
-      throw new AttomApiError(code, b.status?.msg ?? 'unknown');
-    }
+    const msg = b.status?.msg ?? '';
     const prop = b.property?.[0];
     const attomId = prop?.identifier?.attomId;
-    if (!prop || String(attomId) === NOT_FOUND_ATTOM_ID) {
+
+    // No match: ATTOM signals this with a "SuccessWithoutResult" message (which
+    // can carry a non-zero code) or the 999999999 sentinel attomId. Treat all of
+    // these as not-found, not as a hard API error.
+    if (/withoutresult/i.test(msg) || String(attomId) === NOT_FOUND_ATTOM_ID) {
+      throw new AttomNotFoundError(`${address1}, ${address2}`);
+    }
+    // Any other non-zero status code is a genuine API error (e.g. 401/403).
+    if (typeof code === 'number' && code !== 0) {
+      throw new AttomApiError(code, msg || 'unknown');
+    }
+    if (!prop) {
       throw new AttomNotFoundError(`${address1}, ${address2}`);
     }
     return body;
   }
 
-  async function fetchAllEvents(address1: string, address2: string): Promise<unknown> {
+  async function request(endpoint: string, address1: string, address2: string): Promise<unknown> {
     const url =
-      `${config.baseUrl}${config.endpoint}` +
+      `${config.baseUrl}${endpoint}` +
       `?address1=${encodeURIComponent(address1)}` +
       `&address2=${encodeURIComponent(address2)}`;
     const headers = { apikey: apiKey, accept: 'application/json' };
@@ -69,5 +76,8 @@ export function createAttomClient(apiKey: string, deps: AttomClientDeps): AttomC
     throw new AttomRequestError('exhausted retries', lastError);
   }
 
-  return { fetchAllEvents };
+  return {
+    fetchAllEvents: (address1, address2) => request(config.endpoint, address1, address2),
+    fetchMortgageOwner: (address1, address2) => request(config.mortgageEndpoint, address1, address2),
+  };
 }
