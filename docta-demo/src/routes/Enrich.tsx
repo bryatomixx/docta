@@ -97,7 +97,7 @@ export default function Enrich() {
       if (!res.ok) {
         setError(
           res.status === 404
-            ? 'Dirección no encontrada en ATTOM. Revisa el formato o prueba otra.'
+            ? 'Dirección no encontrada. Revisa el formato o prueba otra.'
             : (data?.error ?? `Error ${res.status} al generar la oferta.`),
         );
       } else {
@@ -114,8 +114,8 @@ export default function Enrich() {
     <>
       <Topbar
         title="Generar oferta"
-        subtitle="Lead → ATTOM → oferta → email"
-        actions={<Pill tone="gold" size="sm">Agente IA · en vivo</Pill>}
+        subtitle="Estimado de compra"
+        actions={<Pill tone="gold" size="sm">En vivo</Pill>}
       />
 
       <div className="px-6 py-4 border-b border-white/5">
@@ -140,10 +140,6 @@ export default function Enrich() {
             </button>
           </div>
         </form>
-        <p className="mt-2 text-[11.5px] text-paper-dim">
-          El cliente llena estos datos → jalamos la info de la casa (ATTOM: valuación, impuestos, ventas, hipoteca y
-          propietario) → un agente IA evalúa y redacta una oferta preliminar para su correo.
-        </p>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-5">
@@ -166,7 +162,7 @@ function LoadingState() {
     <div className="h-full min-h-[40vh] grid place-items-center">
       <div className="text-center">
         <span className="inline-block h-7 w-7 rounded-full border-2 border-gold/30 border-t-gold animate-spin" />
-        <p className="mt-3 text-[12.5px] text-paper-dim">Buscando la propiedad y redactando la oferta…</p>
+        <p className="mt-3 text-[12.5px] text-paper-dim">Generando el estimado…</p>
       </div>
     </div>
   );
@@ -193,8 +189,7 @@ function EmptyState({ onUseExample }: { onUseExample: () => void }) {
         </div>
         <h3 className="mt-4 text-lg text-paper">Genera una oferta</h3>
         <p className="mt-1.5 text-[12.5px] text-paper-dim leading-relaxed">
-          Captura el lead y la dirección. Enriquecemos con ATTOM (valuación, impuestos, hipoteca, propietario),
-          calculamos la oferta y un agente IA redacta el email.
+          Captura el lead y la dirección, y genera un estimado de compra preliminar.
         </p>
         <button onClick={onUseExample} className="mt-4 h-8 px-3 inline-flex items-center gap-1.5 text-[12px] text-gold hover:text-gold-bright rounded-md ring-1 ring-gold/30 bg-gold/5 transition">
           <MapPin size={12} /> Usar datos de ejemplo
@@ -257,19 +252,15 @@ function ResultView({ data, clientEmail }: { data: LeadResult; clientEmail: stri
               <div className="mt-1.5 text-[12.5px] text-paper-soft leading-relaxed whitespace-pre-line border-t border-white/5 pt-2.5">{email.body}</div>
             </>
           ) : (
-            <div className="text-[12.5px] text-paper-dim">Sin oferta, no se redactó email.</div>
+            <div className="text-[12.5px] text-paper-dim">Sin oferta, no se generó email.</div>
           )}
-          <div className="mt-3 text-[10.5px] text-paper-dim">
-            Redactado por Claude. Envío automático desde tu Gmail al configurar el App Password. Correo del lead guardado:{' '}
-            {data.leadSaved ? 'sí' : 'no (tabla leads pendiente)'}.
-          </div>
         </Section>
 
         {/* RIGHT — ALL property data */}
-        <Section title="Información de la propiedad (ATTOM)">
+        <Section title="Información de la propiedad">
           <div className="text-[13px] text-paper">{record.address.oneLine}</div>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
-            <IdPill label="ATTOM ID" value={record.identifiers.attomId} />
+            <IdPill label="ID" value={record.identifiers.attomId} />
             <IdPill label="FIPS" value={record.identifiers.fips} />
             <IdPill label="APN" value={record.identifiers.apn} />
           </div>
