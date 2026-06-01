@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
-import type { OfferEmail, OfferEmailInput, OfferWriter } from './offerEmail.ts';
-import { buildPrompt } from './offerEmail.ts';
+import type { OfferEmail, OfferEmailInput, OfferWriter } from './offerEmail';
+import { buildPrompt } from './offerEmail';
 
 const SCHEMA = {
   type: 'object',

@@ -1,5 +1,5 @@
-import type { AttomConfig, EnrichedProperty } from './types.ts';
-import { getByPath } from './config.ts';
+import type { AttomConfig, EnrichedProperty } from './types';
+import { getByPath } from './config';
 
 function num(v: unknown): number | null {
   const n = typeof v === 'string' ? Number(v) : v;

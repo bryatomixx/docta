@@ -1,9 +1,9 @@
-import type { EnrichDeps, EnrichedProperty } from './types.ts';
-import type { Offer } from './offer.ts';
-import type { Contact, OfferEmail, OfferWriter } from './offerEmail.ts';
-import type { EmailSender } from './emailSender.ts';
-import { enrichProperty } from './enrichProperty.ts';
-import { buildOffer } from './offer.ts';
+import type { EnrichDeps, EnrichedProperty } from './types';
+import type { Offer } from './offer';
+import type { Contact, OfferEmail, OfferWriter } from './offerEmail';
+import type { EmailSender } from './emailSender';
+import { enrichProperty } from './enrichProperty';
+import { buildOffer } from './offer';
 
 export interface LeadEmailRepository {
   saveEmail(email: string): Promise<void>;

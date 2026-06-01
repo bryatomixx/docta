@@ -1,8 +1,8 @@
 // Vercel Serverless Function — POST /api/offer
 // Full lead flow: enrich + compute offer + write the email with Claude.
 // Reads keys from process.env (set in Vercel → Settings → Environment Variables).
-import { createLeadDeps } from '../supabase/functions/_shared/enrichment/deps.ts';
-import { processLead } from '../supabase/functions/_shared/enrichment/processLead.ts';
+import { createLeadDeps } from '../supabase/functions/_shared/enrichment/deps';
+import { processLead } from '../supabase/functions/_shared/enrichment/processLead';
 
 export const config = { maxDuration: 60 };
 

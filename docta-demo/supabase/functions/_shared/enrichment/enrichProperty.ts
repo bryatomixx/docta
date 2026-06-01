@@ -1,8 +1,8 @@
-import type { EnrichDeps, EnrichedProperty } from './types.ts';
-import { parseAddress } from './address.ts';
-import { parseAllEvents, parseMortgageOwner } from './parse.ts';
-import { AttomNotFoundError } from './errors.ts';
-import { createDefaultDeps } from './deps.ts';
+import type { EnrichDeps, EnrichedProperty } from './types';
+import { parseAddress } from './address';
+import { parseAllEvents, parseMortgageOwner } from './parse';
+import { AttomNotFoundError } from './errors';
+import { createDefaultDeps } from './deps';
 
 export async function enrichProperty(address: string, deps?: EnrichDeps): Promise<EnrichedProperty> {
   const d = deps ?? createDefaultDeps();

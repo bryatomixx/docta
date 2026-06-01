@@ -1,8 +1,8 @@
 // Vercel Serverless Function — POST /api/enrich
 // Reuses the same enrichment module the Vite dev middleware uses. Reads keys
 // from process.env (set in Vercel → Settings → Environment Variables).
-import { createDefaultDeps } from '../supabase/functions/_shared/enrichment/deps.ts';
-import { enrichProperty } from '../supabase/functions/_shared/enrichment/enrichProperty.ts';
+import { createDefaultDeps } from '../supabase/functions/_shared/enrichment/deps';
+import { enrichProperty } from '../supabase/functions/_shared/enrichment/enrichProperty';
 
 export const config = { maxDuration: 60 };
 

@@ -1,5 +1,5 @@
-import type { EnrichedProperty } from './types.ts';
-import type { Offer } from './offer.ts';
+import type { EnrichedProperty } from './types';
+import type { Offer } from './offer';
 
 export interface Contact {
   firstName: string;

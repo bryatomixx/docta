@@ -1,12 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
-import type { EnrichDeps, HttpClient } from './types.ts';
-import { ATTOM_CONFIG } from './config.ts';
-import { createAttomClient } from './attomClient.ts';
-import { SupabaseRepository, SupabaseLeadRepository } from './persistence.ts';
-import { consoleLogger } from './logger.ts';
-import { createAnthropicWriter } from './anthropicWriter.ts';
-import { createPreviewSender } from './emailSender.ts';
-import type { LeadDeps } from './processLead.ts';
+import type { EnrichDeps, HttpClient } from './types';
+import { ATTOM_CONFIG } from './config';
+import { createAttomClient } from './attomClient';
+import { SupabaseRepository, SupabaseLeadRepository } from './persistence';
+import { consoleLogger } from './logger';
+import { createAnthropicWriter } from './anthropicWriter';
+import { createPreviewSender } from './emailSender';
+import type { LeadDeps } from './processLead';
 
 export const realHttp: HttpClient = async (url, init) => {
   const res = await fetch(url, { method: init.method ?? 'GET', headers: init.headers, signal: init.signal });

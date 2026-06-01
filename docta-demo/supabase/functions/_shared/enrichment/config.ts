@@ -1,4 +1,4 @@
-import type { AttomConfig } from './types.ts';
+import type { AttomConfig } from './types';
 
 export const ATTOM_CONFIG: AttomConfig = {
   baseUrl: 'https://api.gateway.attomdata.com/propertyapi/v1.0.0/',

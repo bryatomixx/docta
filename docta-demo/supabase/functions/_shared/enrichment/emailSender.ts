@@ -1,4 +1,4 @@
-import type { OfferEmail } from './offerEmail.ts';
+import type { OfferEmail } from './offerEmail';
 
 export interface EmailMessage extends OfferEmail {
   to: string;

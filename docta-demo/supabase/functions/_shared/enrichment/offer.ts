@@ -1,4 +1,4 @@
-import type { EnrichedProperty } from './types.ts';
+import type { EnrichedProperty } from './types';
 
 /**
  * Deterministic, code-computed cash offer. The LLM never invents the number —

@@ -1,4 +1,4 @@
-import type { LogEntry, Logger } from './types.ts';
+import type { LogEntry, Logger } from './types';
 
 export const consoleLogger: Logger = {
   log(entry: LogEntry): void {

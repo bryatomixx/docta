@@ -1,4 +1,4 @@
-import type { EnrichedProperty, EnrichmentRepository } from './types.ts';
+import type { EnrichedProperty, EnrichmentRepository } from './types';
 
 const TABLE = 'enriched_properties';
 

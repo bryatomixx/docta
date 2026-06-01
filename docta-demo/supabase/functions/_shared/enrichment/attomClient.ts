@@ -1,5 +1,5 @@
-import type { AttomClientApi, AttomConfig, HttpClient } from './types.ts';
-import { AttomApiError, AttomNotFoundError, AttomRequestError } from './errors.ts';
+import type { AttomClientApi, AttomConfig, HttpClient } from './types';
+import { AttomApiError, AttomNotFoundError, AttomRequestError } from './errors';
 
 const NOT_FOUND_ATTOM_ID = '999999999';
 
