@@ -241,9 +241,13 @@ function ResultView({ data, clientEmail }: { data: LeadResult; clientEmail: stri
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Email preview */}
-        <Section title="Email al cliente (vista previa)" badge={<Pill tone={data.emailSent ? 'success' : 'neutral'} size="sm">{data.emailSent ? 'Enviado' : 'Envío pendiente'}</Pill>}>
+      {/* Two columns: LEFT = email that will be auto-sent · RIGHT = ALL property data */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+        {/* LEFT — Email */}
+        <Section
+          title="Email que se enviará automáticamente"
+          badge={<Pill tone={data.emailSent ? 'success' : 'neutral'} size="sm">{data.emailSent ? 'Enviado' : 'Envío pendiente'}</Pill>}
+        >
           {email ? (
             <>
               <div className="text-[11px] text-paper-dim">
@@ -261,96 +265,90 @@ function ResultView({ data, clientEmail }: { data: LeadResult; clientEmail: stri
           </div>
         </Section>
 
-        {/* Owner + financing — the investor intel */}
-        <Section title="Propietario y financiamiento (ATTOM)">
-          {/* Owner */}
-          {o ? (
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[13.5px] text-paper font-medium">{o.name}{o.secondName ? ` y ${o.secondName}` : ''}</span>
-                {o.absentee === true && <Pill tone="warning" size="sm">Dueño ausente</Pill>}
-                {o.absentee === false && <Pill tone="neutral" size="sm">Ocupado por dueño</Pill>}
-                {o.corporate === true && <Pill tone="info" size="sm">Corporativo</Pill>}
-              </div>
-              {o.mailingAddress && <div className="text-[11px] text-paper-dim">Correspondencia: {o.mailingAddress}</div>}
-            </div>
-          ) : (
-            <div className="text-[12.5px] text-paper-dim">Sin datos de propietario.</div>
-          )}
+        {/* RIGHT — ALL property data */}
+        <Section title="Información de la propiedad (ATTOM)">
+          <div className="text-[13px] text-paper">{record.address.oneLine}</div>
+          <div className="mt-1.5 flex flex-wrap gap-1.5">
+            <IdPill label="ATTOM ID" value={record.identifiers.attomId} />
+            <IdPill label="FIPS" value={record.identifiers.fips} />
+            <IdPill label="APN" value={record.identifiers.apn} />
+          </div>
 
-          {/* Financing */}
-          <div className="mt-3 pt-3 border-t border-white/5">
-            {f && (f.loanAmount != null || f.lender) ? (
-              <div className="flex flex-col gap-2">
-                <KV label="Préstamo registrado" value={`${fUsd(f.loanAmount)}${f.loanDate ? ` · ${f.loanDate}` : ''}`} />
-                <KV label="Prestamista" value={f.lender ?? '—'} />
-                <KV label="Tipo / plazo" value={`${f.loanType ? (LOAN_TYPES[f.loanType] ?? f.loanType) : '—'}${f.termMonths ? ` · ${f.termMonths} meses (~${Math.round(f.termMonths / 12)} años)` : ''}`} />
-                <KV label="Vence" value={f.dueDate ?? '—'} />
-                <KV
-                  label="Equity estimado"
-                  value={f.estimatedEquity != null ? usd(f.estimatedEquity) : '—'}
-                  hint="AVM − préstamo registrado (estimado conservador)"
-                  strong
-                />
+          <div className="mt-4 flex flex-col gap-4">
+            {/* Owner */}
+            <SubBlock title="Propietario">
+              {o ? (
+                <>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[13.5px] text-paper font-medium">{o.name}{o.secondName ? ` y ${o.secondName}` : ''}</span>
+                    {o.absentee === true && <Pill tone="warning" size="sm">Dueño ausente</Pill>}
+                    {o.absentee === false && <Pill tone="neutral" size="sm">Ocupado por dueño</Pill>}
+                    {o.corporate === true && <Pill tone="info" size="sm">Corporativo</Pill>}
+                  </div>
+                  {o.mailingAddress && <div className="text-[11px] text-paper-dim">Correspondencia: {o.mailingAddress}</div>}
+                </>
+              ) : (
+                <div className="text-[12.5px] text-paper-dim">Sin datos de propietario.</div>
+              )}
+            </SubBlock>
+
+            {/* Financing */}
+            <SubBlock title="Hipoteca y equity">
+              {f && (f.loanAmount != null || f.lender) ? (
+                <>
+                  <KV label="Préstamo registrado" value={`${fUsd(f.loanAmount)}${f.loanDate ? ` · ${f.loanDate}` : ''}`} />
+                  <KV label="Prestamista" value={f.lender ?? '—'} />
+                  <KV label="Tipo / plazo" value={`${f.loanType ? (LOAN_TYPES[f.loanType] ?? f.loanType) : '—'}${f.termMonths ? ` · ${f.termMonths} meses (~${Math.round(f.termMonths / 12)} años)` : ''}`} />
+                  <KV label="Vence" value={f.dueDate ?? '—'} />
+                  <KV label="Equity estimado" value={f.estimatedEquity != null ? usd(f.estimatedEquity) : '—'} hint="AVM − préstamo registrado (estimado conservador)" strong />
+                </>
+              ) : (
+                <div className="text-[12.5px] text-paper-dim">Sin hipoteca registrada (posible libre de gravamen).</div>
+              )}
+            </SubBlock>
+
+            {/* Valuation */}
+            <SubBlock title="Valuación (AVM)">
+              <KV label="Valor estimado" value={record.valuation ? usd(record.valuation.avmValue) : '—'} strong />
+              <KV label="Rango" value={record.valuation ? `${fUsd(record.valuation.avmLow)} – ${fUsd(record.valuation.avmHigh)}` : '—'} />
+            </SubBlock>
+
+            {/* Assessment */}
+            <SubBlock title="Assessment / Impuestos">
+              <KV label="Valor catastral" value={fUsd(record.assessment?.assessedValue)} />
+              <KV label="Valor de mercado" value={fUsd(record.assessment?.marketValue)} />
+              <KV label={`Impuesto ${record.assessment?.taxYear ?? ''}`.trim()} value={fUsd(record.assessment?.taxAmount)} />
+            </SubBlock>
+
+            {/* Characteristics */}
+            <SubBlock title="Características">
+              <div className="grid grid-cols-3 gap-2">
+                <Mini icon={Bed} label="Rec." value={c.beds != null ? String(c.beds) : '—'} />
+                <Mini icon={Bath} label="Baños" value={c.baths != null ? String(c.baths) : '—'} />
+                <Mini icon={Square} label="Pies²" value={fNum(c.sqft)} />
+                <Mini icon={Calendar} label="Año" value={c.yearBuilt != null ? String(c.yearBuilt) : '—'} />
+                <Mini icon={Square} label="Lote ft²" value={fNum(c.lotSizeSqft)} />
               </div>
-            ) : (
-              <div className="text-[12.5px] text-paper-dim">Sin hipoteca registrada (posible libre de gravamen).</div>
-            )}
+            </SubBlock>
+
+            {/* Sale history */}
+            <SubBlock title="Historial de ventas">
+              {record.saleHistory.length > 0 ? (
+                <ul className="flex flex-col divide-y divide-white/5">
+                  {record.saleHistory.map((s, i) => (
+                    <li key={i} className="flex items-center justify-between py-1.5 first:pt-0 last:pb-0 text-[12.5px]">
+                      <span className="text-paper-soft font-mono">{s.saleDate ?? '—'}</span>
+                      <span className="text-paper">{fUsd(s.saleAmount)}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="text-[12.5px] text-paper-dim">Sin ventas registradas.</div>
+              )}
+            </SubBlock>
           </div>
         </Section>
       </div>
-
-      {/* Full ATTOM data */}
-      <Section title="Datos ATTOM de la propiedad">
-        <div className="text-[13px] text-paper">{record.address.oneLine}</div>
-        <div className="mt-1 flex flex-wrap gap-1.5">
-          <IdPill label="ATTOM ID" value={record.identifiers.attomId} />
-          <IdPill label="FIPS" value={record.identifiers.fips} />
-          <IdPill label="APN" value={record.identifiers.apn} />
-        </div>
-
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-          {/* Valuación */}
-          <SubBlock title="Valuación (AVM)">
-            <KV label="Valor estimado" value={record.valuation ? usd(record.valuation.avmValue) : '—'} strong />
-            <KV label="Rango" value={record.valuation ? `${fUsd(record.valuation.avmLow)} – ${fUsd(record.valuation.avmHigh)}` : '—'} />
-          </SubBlock>
-
-          {/* Assessment */}
-          <SubBlock title="Assessment / Impuestos">
-            <KV label="Valor catastral" value={fUsd(record.assessment?.assessedValue)} />
-            <KV label="Valor de mercado" value={fUsd(record.assessment?.marketValue)} />
-            <KV label={`Impuesto ${record.assessment?.taxYear ?? ''}`.trim()} value={fUsd(record.assessment?.taxAmount)} />
-          </SubBlock>
-
-          {/* Características */}
-          <SubBlock title="Características">
-            <div className="grid grid-cols-3 gap-2">
-              <Mini icon={Bed} label="Rec." value={c.beds != null ? String(c.beds) : '—'} />
-              <Mini icon={Bath} label="Baños" value={c.baths != null ? String(c.baths) : '—'} />
-              <Mini icon={Square} label="Pies²" value={fNum(c.sqft)} />
-              <Mini icon={Calendar} label="Año" value={c.yearBuilt != null ? String(c.yearBuilt) : '—'} />
-              <Mini icon={Square} label="Lote ft²" value={fNum(c.lotSizeSqft)} />
-            </div>
-          </SubBlock>
-
-          {/* Sale history */}
-          <SubBlock title="Historial de ventas">
-            {record.saleHistory.length > 0 ? (
-              <ul className="flex flex-col divide-y divide-white/5">
-                {record.saleHistory.map((s, i) => (
-                  <li key={i} className="flex items-center justify-between py-1.5 first:pt-0 last:pb-0 text-[12.5px]">
-                    <span className="text-paper-soft font-mono">{s.saleDate ?? '—'}</span>
-                    <span className="text-paper">{fUsd(s.saleAmount)}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="text-[12.5px] text-paper-dim">Sin ventas registradas.</div>
-            )}
-          </SubBlock>
-        </div>
-      </Section>
     </div>
   );
 }
