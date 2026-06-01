@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Latin Prime Systems — Respuesta a Solicitud de Definiciones · RD Exchange</title>
+<style>
+  @page { size: A4; margin: 15mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #14223d; font-size: 10px; line-height: 1.42; margin: 0; }
+  h1 { font-size: 20px; margin: 0 0 2px; color: #0a1628; }
+  h2 { font-size: 13px; margin: 18px 0 6px; color: #0a1628; border-bottom: 2px solid #c9a55a; padding-bottom: 3px; }
+  h3 { font-size: 11px; margin: 12px 0 3px; color: #8a6f30; text-transform: uppercase; letter-spacing: .03em; }
+  .sub { color: #6b7280; font-size: 11px; margin: 0 0 4px; }
+  .tag { display: inline-block; background: #c9a55a; color: #0a1628; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: .05em; }
+  table { width: 100%; border-collapse: collapse; margin: 5px 0 9px; font-size: 9.5px; }
+  th, td { text-align: left; padding: 4px 7px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #0a1628; color: #f4f0e6; font-weight: 600; }
+  tr:nth-child(even) td { background: #faf8f3; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .total td { font-weight: 700; background: #f3ecd8 !important; border-top: 2px solid #c9a55a; }
+  ul { margin: 3px 0 7px; padding-left: 15px; }
+  li { margin: 1.5px 0; }
+  .q { margin: 5px 0 1px; font-size: 9.8px; }
+  .q b { color: #0a1628; }
+  .a { margin: 0 0 5px; padding-left: 11px; border-left: 2px solid #e8e1d0; }
+  .note { background: #faf8f3; border-left: 3px solid #c9a55a; padding: 6px 10px; margin: 7px 0; font-size: 9.5px; }
+  .warn { background: #fef6f0; border-left: 3px solid #d97a4a; padding: 6px 10px; margin: 7px 0; font-size: 9.5px; }
+  .todo { background: #fdecea; border: 1px dashed #c0392b; border-radius: 4px; padding: 5px 9px; margin: 4px 0 7px; font-size: 9.5px; color: #a82315; }
+  .todo b { color: #c0392b; }
+  .muted { color: #6b7280; }
+  .am { color: #c0392b; font-weight: 700; }
+  .ag { color: #7a5b00; font-weight: 700; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #0a1628; padding-bottom: 9px; margin-bottom: 4px; }
+  .logo { width: 32px; height: 32px; background: linear-gradient(135deg,#c9a55a,#8a6f30); border-radius: 7px; color: #0a1628; font-weight: 800; font-size: 19px; display: grid; place-items: center; }
+  .brandrow { display: flex; gap: 10px; align-items: center; }
+  .foot { margin-top: 14px; padding-top: 7px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 8.5px; }
+  .kpis { display: flex; gap: 7px; margin: 7px 0; }
+  .kpi { flex: 1; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 9px; background: #faf8f3; }
+  .kpi .v { font-size: 15px; font-weight: 700; color: #0a1628; }
+  .kpi .l { font-size: 8px; color: #6b7280; text-transform: uppercase; letter-spacing: .04em; }
+  .pagebreak { page-break-before: always; }
+  .legend { font-size: 9px; color: #6b7280; margin: 2px 0 0; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div><div class="brandrow"><div class="logo">D</div><div>
+    <h1>RD Exchange — Respuesta a Solicitud de Definiciones</h1>
+    <p class="sub">Latin Prime Systems · Infra Partner · Para: Docta Consulting LLC</p>
+  </div></div></div>
+  <div style="text-align:right"><span class="tag">Técnicas · Costos · Operativas</span><br/><span class="muted" style="font-size:9px">Documento de alineación · v1</span></div>
+</div>
+
+<p class="legend">Respondemos en el mismo orden y a cada punto de la solicitud. <b>✓</b> = respondido por Latin Prime ·
+<span class="am">▢ / ◇ (en rojo)</span> = lo que falta llenar manual (dato de empresa, cifra de honorarios o punto a acordar con Docta).</p>
+
+<h2>1. Objetivo — qué busca validar Docta</h2>
+<table>
+  <tr><th style="width:62%">Docta busca validar</th><th>Dónde se responde</th></tr>
+  <tr><td>Arquitectura técnica propuesta</td><td>§2 (stack y módulos)</td></tr>
+  <tr><td>Componentes incluidos en cada fase</td><td>§3.1 (Fase 1) · §2.6 y §4 (fases posteriores)</td></tr>
+  <tr><td>Costos de setup, licencias, herramientas, soporte y mantenimiento</td><td>§3.1 · §3.2 · §3.3</td></tr>
+  <tr><td>Qué activos quedan bajo control de Docta</td><td>§3.4</td></tr>
+  <tr><td>Responsabilidades de Latin Prime</td><td>§3.1 · §3.3 · §3.5</td></tr>
+  <tr><td>Evidencia (experiencia, clientes, compliance, IA, datos)</td><td>§2.2 (▢) · §5 demo en vivo</td></tr>
+  <tr><td>Modelo de soporte, continuidad y transferencia</td><td>§3.3 · §3.4</td></tr>
+</table>
+
+<h2>2. Definiciones técnicas</h2>
+
+<h3>2.1 Identidad, empresa y equipo asignado</h3>
+<div class="q"><b>Nombre legal exacto de la empresa que prestaría el servicio:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>Relación entre Latin Prime Systems, Latin Prime FG y cualquier otra entidad relacionada:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>Sitio web oficial:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>LinkedIn de la empresa:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>LinkedIn de los responsables del proyecto:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>Dirección comercial y datos de registro de la empresa en EE.UU.:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>Responsable directo del proyecto:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime.</span></div>
+<div class="q"><b>Equipo técnico asignado durante los primeros 90 días:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime</span> (roles sugeridos: lead técnico, integraciones, IA/datos, soporte).</div>
+
+<h3>2.2 Experiencia comprobable</h3>
+<div class="q"><b>Clientes activos o anteriores verificables:</b></div>
+<div class="a">✓ Negocio Capital · NBG Latino · BRV Asesorías (detalle abajo). <span class="muted">Links, capturas y referencias disponibles a solicitud.</span></div>
+<div class="q"><b>Casos comparables en CRM, automatización, SMS, WhatsApp, IA o real estate:</b></div>
+<table>
+  <tr><th style="width:20%">Cliente</th><th>Qué construimos</th><th>Stack / Relevancia</th></tr>
+  <tr><td><b>Negocio Capital</b></td><td>CRM completo en GoHighLevel: funnels, websites, Meta Pixel, envío automático de contratos, automatizaciones e integraciones que envían datos a Airtable y Slack vía n8n.</td><td>GHL · n8n · integraciones → CRM + automatización + pipelines (§2.3 / §2.5)</td></tr>
+  <tr><td><b>NBG Latino</b></td><td>Academia conectada a base de datos: tracking de progreso por módulo, alta de nuevos agentes vía formulario y dashboard de líderes que monitorea ventas y avance — todo persistido en base de datos.</td><td>TypeScript · Supabase / PostgreSQL · dashboards — mismo stack propuesto para RD Exchange</td></tr>
+  <tr><td><b>BRV Asesorías</b></td><td>App (n8n + JavaScript) que ingiere archivos de la DIAN y genera automáticamente un archivo con los impuestos discriminados. Antes: revisión manual de miles de compras = horas/días por cliente; ahora: segundos.</td><td>Automatización + procesamiento de datos · ROI medible (días → segundos)</td></tr>
+  <tr><td><b>RD Exchange (demo)</b></td><td>Motor de enriquecimiento de propiedades + IA de ofertas.</td><td>IA · real estate · enriquecimiento — funcional en vivo (§5)</td></tr>
+</table>
+<div class="q"><b>Referencias contactables o demos anonimizadas:</b></div>
+<div class="a">✓ Demo funcional en vivo (§5) + referencias de clientes <b>disponibles a solicitud</b>.</div>
+<div class="q"><b>Resultados medibles (leads procesados, tasa de respuesta, tiempo de respuesta automática, conversión lead→cita/deal):</b></div>
+<div class="a">✓ Ej.: <b>BRV Asesorías</b> — procesamiento que tomaba horas/días reducido a <b>segundos</b>. <span class="muted">Métricas adicionales por proyecto, a solicitud.</span></div>
+<div class="q"><b>Experiencia específica en real estate, pre-foreclosure, seller finance, subject-to, wholesaling o lead management inmobiliario:</b></div>
+<div class="a"><span class="am">▢ A completar por Latin Prime</span> (de existir; si no, se apalanca el motor RD Exchange ya construido como evidencia técnica directa en el dominio).</div>
+
+<h3>2.3 CRM y pipeline operativo</h3>
+<div class="q"><b>Plataforma recomendada (GHL / HubSpot / propio):</b></div>
+<div class="a">✓ CRM/pipeline <b>propio</b> (transferible 100% a Docta, sin renta); GoHighLevel como alternativa de menor time-to-market.</div>
+<div class="q"><b>Rol de GHL, n8n, Twilio, WhatsApp API, VAPI:</b></div>
+<div class="a">✓ n8n orquesta; Twilio envía/recibe SMS y WhatsApp; el motor propio enriquece y genera ofertas; GHL opcional como CRM; VAPI solo para voz (fase posterior).</div>
+<div class="q"><b>Estructura de pipelines:</b></div>
+<div class="a">✓ Embudo por etapas con automatización por evento (entra lead → enriquece → IA contacta → avanza según respuesta).</div>
+<div class="q"><b>Estados sugeridos (frío, interesado, en análisis, oferta, negociación, marketplace):</b></div>
+<div class="a">✓ Lead frío → Contactado → Interesado → Propiedad en análisis → Oferta preliminar enviada → En negociación → Cita/Deal → Marketplace.</div>
+<div class="q"><b>Capacidad multiusuario:</b></div>
+<div class="a">✓ Sí.</div>
+<div class="q"><b>Gestión de roles (admin, operadores, agencias, brokers, inversores):</b></div>
+<div class="a">✓ Sí — acceso y permisos por rol para cada perfil.</div>
+<div class="q"><b>Exportar datos y migrar a futuro:</b></div>
+<div class="a">✓ Sí — CSV/API en cualquier momento, sin lock-in.</div>
+
+<h3>2.4 WhatsApp Business, SMS y compliance USA</h3>
+<div class="q"><b>Proveedor WhatsApp / SMS:</b></div>
+<div class="a">✓ Twilio (SMS + WhatsApp Business API).</div>
+<div class="q"><b>Experiencia con Twilio A2P 10DLC:</b></div>
+<div class="a">✓ Dominamos el proceso (brand + campaign registration).</div>
+<div class="q"><b>Evidencia de registros A2P aprobados en proyectos anteriores:</b></div>
+<div class="a">✓ A2P 10DLC <b>registrado y aprobado</b> (cuenta <b>Capital Ganador</b>, vía GoHighLevel): estado "A2P 10DLC compliant" con 3 números "A2P Verified". Funnel de opt-in (fuente de consentimiento): <b>capitalganador.com/a2p-page</b>. Captura del panel adjunta.</div>
+<div class="q"><b>Opt-in / opt-out / STOP / unsubscribe / trazabilidad:</b></div>
+<div class="a">✓ STOP/unsubscribe automático, scrubbing DNC y registro de consentimiento por lead.</div>
+<div class="q"><b>Estrategia para evitar bloqueos/restricciones:</b></div>
+<div class="a">✓ Mensajes cortos y personalizados, plantillas aprobadas, control de frecuencia y monitoreo de reputación.</div>
+<div class="q"><b>Límites diarios recomendados para comenzar:</b></div>
+<div class="a">✓ Arranque conservador con warming → escalar a 100–300 SMS/día.</div>
+<div class="q"><b>Rotación de números, warming de líneas, control de reputación:</b></div>
+<div class="a">✓ Sí — rotación de números, calentamiento gradual y monitoreo de entregabilidad/reputación.</div>
+<div class="q"><b>Costos mensuales y variables por mensaje:</b></div>
+<div class="a">✓ Twilio base ~$15/mes + ~$0.025 por SMS all-in (incluye recargos A2P); A2P ~$65 una vez. Detalle en §3.2.</div>
+<div class="warn"><b>Compliance (responsabilidad compartida):</b> el envío en frío bajo TCPA exige consentimiento adecuado (multas $500–$1,500/mensaje). Latin Prime entrega opt-out, DNC y trazabilidad; la estrategia de consentimiento y su validación legal son de Docta (recomendamos abogado especializado).</div>
+
+<div class="pagebreak"></div>
+
+<h3>2.5 Automatización, IA y enriquecimiento de datos</h3>
+<div class="q"><b>n8n / Make / Zapier / GHL workflows:</b></div>
+<div class="a">✓ n8n (self-hosted, mayor control, transferible).</div>
+<div class="q"><b>Operaciones mensuales estimadas para 150 leads/día:</b></div>
+<div class="a">✓ ~4,500 leads/mes → <b>~20,000–30,000 operaciones/mes</b> (enriquecimiento + IA + mensajería + seguimientos).</div>
+<div class="q"><b>Automatizaciones incluidas en Fase 1:</b></div>
+<div class="a">✓ <b>Entry del formulario de Facebook (Lead Ads)</b> → enriquecimiento → cálculo del estimado → redacción IA → envío del estimado (SMS+email) → seguimiento → opt-out → avance de pipeline.</div>
+<div class="q"><b>Qué agentes de IA proponen:</b></div>
+<div class="a">✓ Un agente de calificación/oferta (texto). Voz (VAPI) en fase posterior.</div>
+<div class="q"><b>¿La IA solo responde, o también califica / pide datos / interpreta / sugiere oferta / prioriza?</b></div>
+<div class="a">✓ <b>Todo lo anterior:</b> califica, pide datos faltantes, interpreta respuestas, sugiere rango de oferta y prioriza (ej. dueño ausente + alto equity).</div>
+<div class="q"><b>Modelo de IA (OpenAI / Claude / Gemini):</b></div>
+<div class="a">✓ <b>Claude (Anthropic)</b> — Opus 4.8 para ofertas, Haiku para SMS.</div>
+<div class="q"><b>Cómo evitan respuestas incorrectas / promesas indebidas / errores legales:</b></div>
+<div class="a">✓ El <b>monto de la oferta se calcula en código (determinista); la IA NO inventa cifras</b>; lenguaje obligatorio "preliminar / no vinculante / sujeto a inspección"; guardrails en el prompt.</div>
+<div class="q"><b>¿Revisión humana antes de una oferta formal?</b></div>
+<div class="a">✓ <b>Regla dura: la IA NUNCA cierra ni envía la oferta final — SIEMPRE la da un humano.</b> La IA solo manda el estimado preliminar inicial y (mes 2) califica/responde. Cuando un lead muestra interés, un <b>sistema de notificaciones alerta al humano</b> (dashboard + email/Slack/WhatsApp) para que entre, negocie y <b>envíe la oferta final</b>.</div>
+<div class="q"><b>Fuentes de enriquecimiento (Zillow, BatchLeads, PropStream, Foreclosure.com, county, APIs, scraping):</b></div>
+<div class="a">✓ <b>BatchData/BatchLeads</b> (skip tracing + propiedad) y <b>ATTOM</b> (hipoteca, equity, propietario, county records). PropStream/Foreclosure.com integrables si Docta los prefiere. Zillow/MLS no viable como API abierta (gated); no dependemos de scraping.</div>
+<div class="q"><b>Qué se automatiza vs. revisión manual:</b></div>
+<div class="a">✓ Automático: enriquecimiento, valuación, estimado preliminar, mensajería y calificación. <b>Manual (siempre humano): la oferta final y el cierre.</b></div>
+<div class="q"><b>Ficha automática por propiedad:</b></div>
+<div class="a">✓ Sí (funcional hoy).</div>
+
+<h3>2.6 Marketplace</h3>
+<div class="q"><b>¿Fase 1 o posterior?</b></div>
+<div class="a">✓ <b>Tras un período de validación de adopción</b>: primero el motor de adquisición; el marketplace se construye una vez que los usuarios demuestren que adoptan la plataforma y suben propiedades (compuerta build → validar → escalar; ver §4).</div>
+<div class="q"><b>Alcance mínimo viable:</b></div>
+<div class="a">✓ Listado de propiedades con ficha, estado y filtros, sobre la misma base de datos; los usuarios suben sus propias propiedades.</div>
+<div class="q"><b>Roles de usuarios:</b></div>
+<div class="a">✓ <b>Abierto a múltiples tipos:</b> agentes, inversores, brokers, <b>agencias de marketing</b> y dueños (además de admin/operador) — plataforma multiusuario.</div>
+<div class="q"><b>Publicación de propiedades propias y de terceros:</b></div>
+<div class="a">✓ Sí, con control de quién publica.</div>
+<div class="q"><b>Trazabilidad de origen del deal:</b></div>
+<div class="a">✓ Sí — cada propiedad/lead conserva su fuente y atribución.</div>
+<div class="q"><b>Control de comisiones:</b></div>
+<div class="a">✓ Sí — comisión por deal/origen, configurable.</div>
+<div class="q"><b>Capacidad futura para brokers, inversores y compradores:</b></div>
+<div class="a">✓ Contemplada en el diseño de la fase de marketplace.</div>
+
+<div class="pagebreak"></div>
+
+<h2>3. Costos, fases y condiciones operativas</h2>
+<p class="muted">Dos cubetas: <b>(A) herramientas de terceros</b> (§3.2, verificadas) y <b>(B) honorarios de Latin Prime</b> — setup y mensualidad (§3.1/§4, marcados ▢).</p>
+
+<h3>3.1 Costos de implementación / setup — por fase</h3>
+<div class="note"><b>Prioridad #1 de la Fase 1 (MVP) — loop completo de ida y vuelta:</b>
+<b>Formulario de Facebook (Lead Ads) → recibir entries → enriquecer → generar el estimado → enviarlo por SMS + email → RECIBIR la respuesta</b>
+(cae en bandeja + pipeline + <b>notifica al humano</b>) para el seguimiento. Enviar sin recibir sería medio loop; el MVP cierra el círculo.
+<b>La oferta final SIEMPRE la cierra un humano</b> (la IA nunca cierra).
+El A2P se registra el día 1 (aprueba típicamente en días). Lo demás (dashboards, marketplace) se construye encima.</div>
+<p class="muted">Fase 1 (60–90 días). <span class="am">Costo de setup: TBD — a determinar en conjunto en la reunión</span> (según alcance final acordado).</p>
+<table>
+  <tr><th>Partida</th><th>Entregable</th><th>Duración aprox.</th><th class="num">Costo</th></tr>
+  <tr><td>Discovery y arquitectura</td><td>Documento de arquitectura + accesos</td><td>Sem. 1–2</td><td class="num am">TBD</td></tr>
+  <tr><td><b>Formulario Facebook (Lead Ads)</b> ★</td><td><b>Conexión del form de FB → recepción de entries (webhook) → guardado del lead</b></td><td>Sem. 1–2</td><td class="num am">TBD</td></tr>
+  <tr><td>Configuración CRM</td><td>CRM, roles, multiusuario</td><td>Sem. 2–3</td><td class="num am">TBD</td></tr>
+  <tr><td>Pipelines</td><td>Embudo + estados + automatización por etapa</td><td>Sem. 3</td><td class="num am">TBD</td></tr>
+  <tr><td>WhatsApp</td><td>Línea Business conectada</td><td>Sem. 3–4</td><td class="num am">TBD</td></tr>
+  <tr><td>SMS</td><td>Twilio + registro A2P 10DLC</td><td>Sem. 1–3 (A2P)</td><td class="num am">TBD</td></tr>
+  <tr><td><b>Recepción de respuestas</b> ★</td><td><b>Inbound SMS (webhook Twilio) + email (Gmail API) → bandeja + pipeline</b></td><td>Sem. 3–4</td><td class="num am">TBD</td></tr>
+  <tr><td><b>Notificaciones al humano</b> ★</td><td><b>Alerta al agente cuando un lead responde / muestra interés (dashboard + email/Slack/WhatsApp) para que entre y cierre</b></td><td>Sem. 3–4</td><td class="num am">TBD</td></tr>
+  <tr><td>Automatizaciones</td><td>Flujos n8n lead→enriquecer→IA→mensajería</td><td>Sem. 4–6</td><td class="num am">TBD</td></tr>
+  <tr><td>Dashboards</td><td>Reportes de leads, respuestas, ofertas</td><td>Sem. 6–7</td><td class="num am">TBD</td></tr>
+  <tr><td>Enriquecimiento de datos</td><td>BatchData (+ATTOM) + ficha por propiedad</td><td>Sem. 3–5</td><td class="num am">TBD</td></tr>
+  <tr><td>IA</td><td>Agente: califica + redacta oferta (revisión humana)</td><td>Sem. 4–7</td><td class="num am">TBD</td></tr>
+  <tr><td>Marketplace</td><td>Fase posterior (no Fase 1)</td><td>—</td><td class="num">—</td></tr>
+  <tr><td>Testing</td><td>Pruebas + entorno staging</td><td>Sem. 7–8</td><td class="num am">TBD</td></tr>
+  <tr><td>Documentación</td><td>Docs de operación y arquitectura</td><td>Sem. 8</td><td class="num am">TBD</td></tr>
+  <tr><td>Capacitación</td><td>Training al equipo Docta</td><td>Sem. 8–9</td><td class="num am">TBD</td></tr>
+</table>
+
+<h3>3.2 Costos mensuales de herramientas y variables — 100 / 200 / 300 SMS/día</h3>
+<div class="note"><b>Supuestos:</b> SMS/día = <b>primeras propuestas enviadas = enriquecimientos/día</b>. Cada propuesta = 1 enriquecimiento + 1 oferta de IA + 1 email. Unitarios: SMS ~$0.025 all-in (incluye recargos A2P; español ≈ 2 segmentos), BatchData $0.05/registro, Claude ~$0.02/oferta. Estimadas; se ajustan con el uso real.</div>
+<div class="kpis">
+  <div class="kpi"><div class="l">100/día · 3,000/mes</div><div class="v">~$345/mes</div></div>
+  <div class="kpi"><div class="l">200/día · 6,000/mes</div><div class="v">~$630/mes</div></div>
+  <div class="kpi"><div class="l">300/día · 9,000/mes</div><div class="v">~$915/mes</div></div>
+</div>
+<div class="note"><b>Importante:</b> la mensajería SMS es barata (~$225/mes a 300/día). El grueso del costo es <b>enriquecer las 9,000 propiedades/mes (BatchData ~$450) + IA</b> — inherente a generar 9,000 propuestas con datos reales. Se reduce con tarifas por volumen de BatchData/ATTOM o ajustando el volumen diario.</div>
+<table>
+  <tr><th>Categoría (fijo)</th><th>Herramienta</th><th class="num">Mensual</th><th class="num">Paga</th></tr>
+  <tr><td>CRM / Pipeline</td><td>Propio (incluido) — o GHL opcional</td><td class="num">$0 / (GHL ▢)</td><td class="num">Docta</td></tr>
+  <tr><td>Hosting + Dashboards</td><td>Vercel (Pro)</td><td class="num">$20</td><td class="num">Docta</td></tr>
+  <tr><td>Base de datos</td><td>Supabase (Pro)</td><td class="num">$25</td><td class="num">Docta</td></tr>
+  <tr><td>SMS / WhatsApp (base)</td><td>Twilio (renta nº + base A2P)</td><td class="num">$15</td><td class="num">Docta</td></tr>
+  <tr><td>Automatización</td><td>n8n (self-hosted en Supabase/Vercel)</td><td class="num">incl.</td><td class="num">Docta</td></tr>
+  <tr><td>Email · Dominio · Workspace</td><td>Google Workspace + dominio</td><td class="num">~$1 + existente</td><td class="num">Docta</td></tr>
+  <tr><td>APIs inmobiliarias (base)</td><td>BatchData / ATTOM (variable abajo)</td><td class="num">según uso</td><td class="num">Docta</td></tr>
+  <tr class="total"><td>Subtotal fijo</td><td></td><td class="num">~$60</td><td></td></tr>
+</table>
+<p class="muted">A 100–300 SMS/día, <b>CRM, hosting, base de datos, dashboards y automatización prácticamente no suben</b> (registros de texto en kilobytes; serverless muy por debajo del plan). Lo que escala: <b>SMS + datos + IA</b>.</p>
+<table>
+  <tr><th>Costo variable</th><th class="num">Unitario</th><th class="num">100/día</th><th class="num">200/día</th><th class="num">300/día</th></tr>
+  <tr><td>Propuestas / enriquecimientos / mes</td><td class="num">—</td><td class="num">3,000</td><td class="num">6,000</td><td class="num">9,000</td></tr>
+  <tr><td>Por SMS (Twilio)</td><td class="num">~$0.025</td><td class="num">~$75</td><td class="num">~$150</td><td class="num">~$225</td></tr>
+  <tr><td>Por conversación WhatsApp</td><td class="num">~$0.005–0.08</td><td class="num" colspan="3" style="text-align:center">según volumen de conversaciones</td></tr>
+  <tr><td>Por enriquecimiento de propiedad (BatchData)</td><td class="num">$0.05</td><td class="num">~$150</td><td class="num">~$300</td><td class="num">~$450</td></tr>
+  <tr><td>Por uso de IA (Claude)</td><td class="num">~$0.02/oferta</td><td class="num">~$60</td><td class="num">~$120</td><td class="num">~$180</td></tr>
+  <tr><td>Por usuario adicional</td><td class="num" colspan="4">CRM propio: sin costo · GHL: según plan</td></tr>
+  <tr><td>Por volumen adicional de leads</td><td class="num" colspan="4">escala lineal con las filas de arriba (SMS + datos + IA)</td></tr>
+  <tr><td>Por automatizaciones excedentes</td><td class="num" colspan="4">n8n self-hosted: sin costo por ejecución</td></tr>
+  <tr class="total"><td>Subtotal variable</td><td></td><td class="num">~$285</td><td class="num">~$570</td><td class="num">~$855</td></tr>
+  <tr class="total"><td>TOTAL herramientas / mes</td><td></td><td class="num">~$345</td><td class="num">~$630</td><td class="num">~$915</td></tr>
+</table>
+<div class="note"><b>Pago único:</b> A2P 10DLC ~$65. <b>Add-ons (aparte):</b> ATTOM premium (hipoteca/equity/permisos) ~$200/mes según cotización · GoHighLevel si reemplaza al CRM propio ~$97–$497/mes. <b>Qué paga Docta directo vs. incluido:</b> recomendamos que TODAS las cuentas de herramientas estén a nombre de Docta (las paga directo, control total); Latin Prime las gestiona. En la propuesta se incluyen solo los honorarios de servicio (§4).</div>
+
+<h3>3.3 Soporte, garantías y continuidad</h3>
+<table>
+  <tr><th>Nivel</th><th>Tiempo de respuesta</th><th>Incluye</th></tr>
+  <tr><td>Básico</td><td>Siguiente día hábil</td><td>Bugs no críticos, ajustes menores</td></tr>
+  <tr><td>Extendido</td><td>Mismo día hábil</td><td>Cambios de flujo, soporte operativo</td></tr>
+  <tr><td>Crítico</td><td>4 h hábiles <span class="am">◇</span></td><td>Fallas que detienen envíos/operación</td></tr>
+  <tr><td>24/7 (incidentes graves)</td><td>1 h <span class="am">◇</span></td><td>Caída total de integración o de envío</td></tr>
+</table>
+<ul>
+  <li>✓ <b>Qué NO incluye:</b> desarrollo de features nuevas fuera de alcance, costos de las APIs/licencias de terceros, cambios pedidos por el cliente fuera del backlog acordado (se cotizan aparte).</li>
+  <li>✓ <b>Garantía:</b> si una integración entregada falla por causa nuestra en los primeros [X] meses <span class="am">◇</span>, se corrige sin costo.</li>
+  <li>✓ <b>Si no se alcanzan los objetivos mínimos acordados:</b> abiertos a ligarlo al modelo de relación (hitos / ajuste de fee / plan correctivo) <span class="am">◇</span> — a definir junto con §3.5.</li>
+  <li>✓ <b>Hitos de pago contra entregables verificables:</b> aceptamos.</li>
+  <li>✓ <b>Continuidad:</b> backups automáticos, recuperación ante fallos y exportación completa de datos.</li>
+  <li><span class="am">▢</span> SLA exactos (horas) y meses de garantía: a definir por Latin Prime.</li>
+</ul>
+
+<div class="pagebreak"></div>
+
+<h3>3.4 Propiedad, control y transferencia</h3>
+<ul>
+  <li>✓ <b>Cuentas bajo titularidad de Docta:</b> Vercel, Supabase, Twilio, BatchData/ATTOM, dominios, Google Workspace.</li>
+  <li>✓ <b>Dueño de los datos:</b> Docta (100% exportables).</li>
+  <li>✓ <b>Dueño de workflows, integraciones y configuraciones:</b> Docta (lo desarrollado para el proyecto).</li>
+  <li>✓ <b>Documentación entregada:</b> arquitectura, manuales de operación, credenciales/accesos, diagramas de flujos n8n.</li>
+  <li>✓ <b>Si Docta cambia de proveedor:</b> entrega de accesos + documentación + exportación completa; transición ordenada.</li>
+  <li><span class="am">◇</span> <b>PI previa de Latin Prime:</b> el motor base de enriquecimiento/oferta (preexistente) — se licencia a Docta; términos a acordar.</li>
+  <li>✓ <b>Componentes desarrollados para Docta:</b> quedan bajo control de Docta.</li>
+  <li><span class="am">◇</span> <b>Condiciones de salida/transición:</b> periodo de traspaso y entrega de activos — a acordar.</li>
+  <li>✓ <b>NDA, confidencialidad, cláusulas de PI y transferencia de activos digitales:</b> disponibilidad para firmar — Sí.</li>
+</ul>
+
+<h3>3.5 Modelo de relación esperado</h3>
+<p class="a">✓ Latin Prime está alineado con el modelo de <b>Infra Partner estratégico</b> de largo plazo y abierto a estructuras
+combinadas (servicios profesionales + soporte mensual + bonificaciones por performance o participación vinculada a la
+facturación). La estructura económica se define según los factores que plantea Docta:</p>
+<table>
+  <tr><th>Factor</th><th>Postura Latin Prime</th></tr>
+  <tr><td>Alcance real</td><td>Fase 1 (§3.1) y fases siguientes acordadas</td></tr>
+  <tr><td>Responsabilidades asumidas</td><td>Build + operación + soporte (§3.3)</td></tr>
+  <tr><td>Nivel de involucramiento</td><td>Infra Partner (no solo proveedor transaccional)</td></tr>
+  <tr><td>Soporte requerido</td><td>Nivel a elegir (§3.3)</td></tr>
+  <tr><td>Propiedad de activos</td><td>A nombre de Docta (§3.4)</td></tr>
+  <tr><td>Resultados esperados</td><td>Abiertos a metas y performance</td></tr>
+  <tr><td>Duración del compromiso</td><td>Largo plazo, con hitos</td></tr>
+  <tr><td>Costos fijos y variables</td><td>§3.2 (herramientas) + honorarios LP <span class="am">▢</span></td></tr>
+</table>
+<p class="muted"><span class="am">▢</span> Estructura económica concreta (fijo / variable / performance): a definir por Latin Prime según los factores anteriores.</p>
+
+<h2>4. Próxima reunión</h2>
+<h3>Tres escenarios de costo</h3>
+<table>
+  <tr><th>Escenario</th><th>Alcance</th><th class="num">Herram./mes</th><th class="num">Setup LP</th><th class="num">Mensual LP</th></tr>
+  <tr><td>Mínimo viable</td><td>Fase 1, 100 SMS/día</td><td class="num">~$345</td><td class="num am">TBD</td><td class="num am">TBD</td></tr>
+  <tr><td>Robusto</td><td>200 SMS/día, WhatsApp, multiusuario</td><td class="num">~$630</td><td class="num am">TBD</td><td class="num am">TBD</td></tr>
+  <tr><td>Escalable</td><td>300 SMS/día, marketplace, performance</td><td class="num">~$915</td><td class="num am">TBD</td><td class="num am">TBD</td></tr>
+</table>
+<h3>Los 10 puntos a cerrar</h3>
+<table>
+  <tr><th style="width:48%">Punto</th><th>Estado</th></tr>
+  <tr><td>1. Stack recomendado</td><td>✓ §2</td></tr>
+  <tr><td>2. Fase 1 mínima viable (60–90 días)</td><td>✓ §3.1 + roadmap</td></tr>
+  <tr><td>3. Costos de setup</td><td>✓ partidas §3.1 · <span class="am">▢ cifras LP</span></td></tr>
+  <tr><td>4. Costos mensuales reales</td><td>✓ §3.2</td></tr>
+  <tr><td>5. Costos variables</td><td>✓ §3.2</td></tr>
+  <tr><td>6. Modelo de soporte</td><td>✓ §3.3 · <span class="am">◇ SLA</span></td></tr>
+  <tr><td>7. Propiedad de cuentas y activos</td><td>✓ §3.4</td></tr>
+  <tr><td>8. Roadmap 30/60/90 días</td><td>✓ abajo</td></tr>
+  <tr><td>9. Demo / entorno staging</td><td>✓ §5</td></tr>
+  <tr><td>10. Condiciones como Infra Partner</td><td>✓ §3.5 · <span class="am">▢ estructura LP</span></td></tr>
+</table>
+<h3>Roadmap 30 / 60 / 90 días</h3>
+<table>
+  <tr><th>Periodo</th><th>Hitos</th></tr>
+  <tr><td>0–30</td><td><b>Prioridad MVP — loop completo:</b> formulario de Facebook → recibir entries → enriquecer (BatchData/ATTOM) → estimado → IA redacta → <b>envío por SMS + email en vivo</b> → <b>recepción de respuestas</b> (bandeja + pipeline + aviso) para seguimiento. A2P registrado el día 1 (aprueba en días); email como respaldo si se demora. <span class="muted">Seguimiento humano al inicio.</span></td></tr>
+  <tr><td>30–60</td><td><b>IA conversacional</b>: responde y califica sola, pide datos y <b>mueve el lead en el pipeline automáticamente</b> · handoff a humano para la oferta final · CRM/roles completo · dashboard de métricas · warming · <b>onboarding de los primeros usuarios</b> (suben sus propiedades) → inicio del <b>período de validación</b></td></tr>
+  <tr><td>60–90</td><td><b>Medición de adopción</b> (usuarios activos, propiedades subidas, retención) · subir a 100–300 propuestas/día · WhatsApp · docs + capacitación · <b>compuerta:</b> si hay adopción → construir el marketplace (Fase 2)</td></tr>
+</table>
+
+<h3>Estrategia de producto — validación antes del marketplace</h3>
+<div class="note"><b>Enfoque build → validar → escalar:</b> no se construye el marketplace completo hasta comprobar adopción (protege la inversión de Docta).</div>
+<table>
+  <tr><th>Etapa</th><th>Qué pasa</th></tr>
+  <tr><td><b>1. Motor de adquisición</b> (mes 1–~2)</td><td>FB form → enriquecer → estimado → SMS/email. Prueba el valor central y genera respuestas.</td></tr>
+  <tr><td><b>2. Validación de adopción</b> (mes 2–3)</td><td>Onboarding de usuarios <b>abiertos</b> (agentes, inversores, brokers, agencias de marketing, dueños). Suben sus propiedades y usan el flujo. Se mide adopción.</td></tr>
+  <tr><td><b>Compuerta de decisión</b></td><td>Si los usuarios adoptan → se invierte en el marketplace. Si no → se ajusta antes de gastar.</td></tr>
+  <tr><td><b>3. Marketplace completo</b> (post-validación)</td><td>Publicación propia/terceros, roles, trazabilidad de deals, comisiones.</td></tr>
+</table>
+<p class="muted"><span class="am">◇ Métrica de "adopción exitosa" (usuarios activos / propiedades subidas / retención): a definir en reunión con Docta.</span></p>
+
+<h2>5. Demo / entorno de prueba — lo que Docta verá</h2>
+<table>
+  <tr><th style="width:55%">Docta necesita ver</th><th>Estado</th></tr>
+  <tr><td>CRM real o entorno demo funcional</td><td>✓ Disponible (pipeline funcional)</td></tr>
+  <tr><td>Pipeline de leads</td><td>✓ Disponible (drag-and-drop, en vivo)</td></tr>
+  <tr><td>Automatización con n8n o GoHighLevel</td><td>◇ Flujo y arquitectura (en producción = Fase 1)</td></tr>
+  <tr><td>Integración con Twilio o WhatsApp</td><td>◇ Fase 1 (requiere A2P; mostramos diseño)</td></tr>
+  <tr><td>Agente IA calificando un lead</td><td>✓ Disponible en vivo</td></tr>
+  <tr><td>Enriquecimiento de datos de propiedad</td><td>✓ Disponible en vivo (ATTOM: valuación, impuestos, hipoteca, equity, propietario)</td></tr>
+  <tr><td>Dashboard o reporte</td><td>✓ Disponible</td></tr>
+  <tr><td>Evidencia de proyecto anterior comparable</td><td>✓ Negocio Capital · NBG Latino · BRV Asesorías (§2.2) — links/capturas a solicitud. + demo funcional RD Exchange como evidencia técnica.</td></tr>
+</table>
+
+<div class="foot">
+  Latin Prime Systems · Respuesta a la solicitud de definiciones técnicas, costos y condiciones operativas — RD Exchange (Docta Consulting LLC).
+  Cifras de herramientas estimadas a junio 2026; ATTOM requiere cotización. Identidad legal, experiencia verificable y honorarios de Latin Prime
+  (marcados <span class="am">▢</span>) se entregan/definen por separado. Compliance TCPA/A2P: validación legal a cargo de Docta.
+</div>
+
+</body>
+</html>
