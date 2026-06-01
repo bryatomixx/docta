@@ -7,11 +7,13 @@ dist/
 **/dist/
 *.tsbuildinfo
 
-# env / secrets — never commit
+# env / secrets — never commit (but DO track .env.example templates)
 .env
 .env.*
 **/.env
 **/.env.*
+!.env.example
+!**/.env.example
 
 # supabase local
 **/supabase/.branches/
