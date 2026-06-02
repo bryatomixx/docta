@@ -16,6 +16,7 @@ import {
 import { cn } from '../lib/cn';
 import { CURRENT_USER } from '../data/users';
 import { Avatar } from './Avatar';
+import { useSidebar } from '../lib/sidebar';
 
 const NAV: { to: string; label: string; icon: typeof LayoutDashboard; badge?: string }[] = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -30,8 +31,18 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; badge?: st
 ];
 
 export function Sidebar() {
+  const { open } = useSidebar();
   return (
-    <aside className="w-60 shrink-0 border-r border-white/5 bg-ink-deep/70 backdrop-blur flex flex-col h-screen sticky top-0">
+    <aside
+      className={cn(
+        'w-60 shrink-0 border-r border-white/5 bg-ink-deep backdrop-blur flex flex-col h-screen z-50',
+        // Mobile: off-canvas drawer that slides in/out
+        'fixed inset-y-0 left-0 transition-transform duration-200 ease-out',
+        open ? 'translate-x-0 shadow-2xl shadow-black/50' : '-translate-x-full',
+        // Desktop (lg+): always visible, part of the flex flow
+        'lg:translate-x-0 lg:static lg:bg-ink-deep/70 lg:shadow-none',
+      )}
+    >
       <div className="px-4 h-14 flex items-center gap-2 border-b border-white/5">
         <div className="h-8 w-8 rounded-md bg-gradient-to-br from-gold to-gold-deep grid place-items-center text-ink-deep font-bold font-display text-lg shrink-0">
           D

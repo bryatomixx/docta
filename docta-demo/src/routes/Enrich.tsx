@@ -118,7 +118,7 @@ export default function Enrich() {
         actions={<Pill tone="gold" size="sm">En vivo</Pill>}
       />
 
-      <div className="px-6 py-4 border-b border-white/5">
+      <div className="px-4 sm:px-6 py-4 border-b border-white/5">
         <form onSubmit={onSubmit} className="flex flex-col gap-2.5 max-w-3xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <input className={inputCls} placeholder="Nombre" aria-label="Nombre" value={contact.firstName} onChange={(e) => set('firstName', e.target.value)} />
@@ -142,7 +142,7 @@ export default function Enrich() {
         </form>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-6 py-5">
+      <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5">
         {loading ? (
           <LoadingState />
         ) : error ? (
